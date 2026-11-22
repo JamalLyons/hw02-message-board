@@ -1,0 +1,48 @@
+i  emulators: Starting emulators: firestore
+i  emulators: Detected demo project ID "demo-hw02-rules", emulated services will use a demo configuration and attempts to access non-emulated services for this project will fail.
+i  firestore: Firestore Emulator logging to firestore-debug.log
+✔  firestore: Firestore Emulator was started in standard edition.
+✔  firestore: Firestore Emulator UI websocket is running on 9150.
+i  Running script: cd rules-tests && npm test
+
+> test
+> mocha --timeout 20000 test/*.test.js
+
+
+
+  firestore.rules
+    ✔ denies a signed-out read of messages (212ms)
+[2026-11-22T00:58:47.222Z]  @firebase/firestore: Firestore (12.19.0): GrpcConnection RPC 'Write' stream 0x76a620c3 error. Code: 7 Message: 7 PERMISSION_DENIED: 
+false for 'create' @ L35, false for 'update' @ L44
+    ✔ denies a signed-out create
+[2026-11-22T00:58:47.280Z]  @firebase/firestore: Firestore (12.19.0): GrpcConnection RPC 'Write' stream 0x76a620c5 error. Code: 7 Message: 7 PERMISSION_DENIED: 
+evaluation error at L44:24 for 'update' @ L44, false for 'update' @ L44
+    ✔ denies a cross-uid update of another user's message (54ms)
+[2026-11-22T00:58:47.314Z]  @firebase/firestore: Firestore (12.19.0): GrpcConnection RPC 'Write' stream 0x76a620c7 error. Code: 7 Message: 7 PERMISSION_DENIED: 
+evaluation error at L52:24 for 'delete' @ L52, false for 'delete' @ L52
+    ✔ denies a cross-uid delete
+[2026-11-22T00:58:47.344Z]  @firebase/firestore: Firestore (12.19.0): GrpcConnection RPC 'Write' stream 0x76a620c8 error. Code: 7 Message: 7 PERMISSION_DENIED: 
+evaluation error at L35:24 for 'create' @ L35, evaluation error at L44:24 for 'update' @ L44, false for 'create' @ L35
+    ✔ denies a forged authorUid on create
+[2026-11-22T00:58:47.385Z]  @firebase/firestore: Firestore (12.19.0): GrpcConnection RPC 'Write' stream 0x76a620ca error. Code: 7 Message: 7 PERMISSION_DENIED: 
+evaluation error at L44:24 for 'update' @ L44, false for 'update' @ L44
+    ✔ denies the owner changing authorUid on update
+    ✔ allows correct-author full CRUD (49ms)
+[2026-11-22T00:58:47.459Z]  @firebase/firestore: Firestore (12.19.0): GrpcConnection RPC 'Write' stream 0x76a620cd error. Code: 7 Message: 7 PERMISSION_DENIED: 
+evaluation error at L35:24 for 'create' @ L35, evaluation error at L44:24 for 'update' @ L44, false for 'create' @ L35
+    ✔ denies creating a message with empty text
+[2026-11-22T00:58:47.481Z]  @firebase/firestore: Firestore (12.19.0): GrpcConnection RPC 'Write' stream 0x76a620ce error. Code: 7 Message: 7 PERMISSION_DENIED: 
+evaluation error at L11:24 for 'create' @ L11, false for 'update' @ L23, false for 'create' @ L11
+[2026-11-22T00:58:47.512Z]  @firebase/firestore: Firestore (12.19.0): GrpcConnection RPC 'Write' stream 0x76a620cf error. Code: 7 Message: 7 PERMISSION_DENIED: 
+false for 'update' @ L23
+    ✔ treats users/{uid} as a write-once owner record (48ms)
+    ✔ allows a signed-in get of a non-existent message
+
+
+  10 passing (979ms)
+
+✔  Script exited successfully (code 0)
+i  emulators: Shutting down emulators.
+i  firestore: Stopping Firestore Emulator
+i  hub: Stopping emulator hub
+i  logging: Stopping Logging Emulator
